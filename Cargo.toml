@@ -6,8 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-soroban-client = "0.2.2"
-stellar-baselib = "0.2.9"
+soroban-client = { path = "../rs-soroban-client" }
 stellar-strkey = "0.0.7"
 tokio = { version = "1", features = ["full"] }
 stellar-xdr =  { version = "20.0.2", default-features = true, features = ["base64", "std", "next", "serde", "alloc"] }

@@ -1061,7 +1061,6 @@ name = "sdemo"
 version = "0.1.0"
 dependencies = [
  "soroban-client",
- "stellar-baselib",
  "stellar-strkey 0.0.7",
  "stellar-xdr",
  "tokio",
@@ -1209,9 +1208,7 @@ dependencies = [
 
 [[package]]
 name = "soroban-client"
-version = "0.2.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8f18abe6651e191068044334650ef8b9651416d72ec1cbfc7eb359c716bdee0a"
+version = "0.2.3"
 dependencies = [
  "futures",
  "http",
@@ -1224,9 +1221,9 @@ dependencies = [
 
 [[package]]
 name = "stellar-baselib"
-version = "0.2.9"
+version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "48a1e190a9c4f8e7126b07778345861d8e08d9a54dacf3247e37efe8d10feaee"
+checksum = "9a9d1c07d4a795205f7d200a65c980bee11517a761258f044fb98283fb7eea55"
 dependencies = [
  "arrayref",
  "getrandom",
