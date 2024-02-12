@@ -17,7 +17,7 @@ async fn main() {
 
     // Check Health of Node
     let _contract_id = "CCJYKPKPQADXVZVGNJIDIUFNBMV6FOKCFZZZMA2FCEZOMDIQA5BBPPCN";
-    let _server = Server::new("https://soroban-testnet.stellar.org:443", Options{ allow_http: None, timeout: Some(1000), headers: None });
+    let _server = Server::new("https://soroban-testnet.stellar.org", Options{ allow_http: None, timeout: Some(1000), headers: None });
     let health = _server.get_health().await.unwrap();
     println!("{:?}", health);
 
@@ -30,8 +30,8 @@ async fn main() {
     let network = _server.get_network().await.unwrap();
     println!("{:?}", network );
 
-    // let mut transaction2 = TransactionBuilder::new(account, "Test SDF Future Network ; October 2022")
-    // .add_operation(contract.call("hello"))
-    // .build();
+    // Get the Transaction
+    let tx = _server.get_transaction("4385bd2342151cf8cb914702c9b52e32f0c2403fec86006ef4241a857f6a993f").await;
+    println!("{:?}", tx);
 
 }
