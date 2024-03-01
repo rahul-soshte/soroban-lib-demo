@@ -1,10 +1,17 @@
+use soroban_client::network::{Networks, NetworkPassphrase};
 #[allow(warnings)]
 use soroban_client::server::Options;
+use soroban_client::transaction::Account;
 use soroban_client::transaction_builder::TransactionBuilder;
 use soroban_client::{server::Server, keypair::Keypair};
 use soroban_client::keypair::KeypairBehavior;
 use soroban_client::transaction_builder::TransactionBuilderBehavior;
-
+use soroban_client::account::AccountBehavior;
+use stellar_xdr::next::{HostFunction, ScSymbol, InvokeContractArgs, Hash, StringM, ScString, ScVal, Limits, WriteXdr, Operation, ReadXdr};
+use stellar_xdr::next::ScAddress;
+use stellar_xdr::next::ScAddress::Contract;
+use std::str::FromStr;
+use stellar_baselib::transaction::TransactionBehavior;
 // Testnet -> https://soroban-testnet.stellar.org
 // Futurenet -> https://rpc-futurenet.stellar.org:443
 
@@ -13,7 +20,7 @@ async fn main() {
     let source_secret_key = "SCCTADNI4B4FEFELEYEYSDUNQXVTXHRAOEXWWJWHJ57EO3VHGXJFL3TC";
     let source_keypair = Keypair::from_secret(source_secret_key).expect("Invalid secret key");
     let _source_public_key = source_keypair.public_key();
-    let _source_public_key = "GDWH3P3MNTCMOY42CA7RVEACUUAUPZ73XDYKPYUL3TWOFRF37FD6OVM6";
+    let _source_public_key = "GBZXN7PIRZGNMHGA7MUUUF4GWPY5AYPV6LY4UV2GL6VJGIQRXFDNMADI";
 
     // Check Health of Node
     let _contract_id = "CCJYKPKPQADXVZVGNJIDIUFNBMV6FOKCFZZZMA2FCEZOMDIQA5BBPPCN";
@@ -33,5 +40,12 @@ async fn main() {
     // Get the Transaction
     let tx = _server.get_transaction("4385bd2342151cf8cb914702c9b52e32f0c2403fec86006ef4241a857f6a993f").await;
     println!("{:?}", tx);
+
+    // Get Account
+    let account = _server.get_account(&_source_public_key).await.unwrap();
+    println!("Account {:?}", account)
+        
+
+        
 
 }
