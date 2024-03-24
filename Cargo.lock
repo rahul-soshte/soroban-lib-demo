@@ -1210,9 +1210,10 @@ dependencies = [
 
 [[package]]
 name = "soroban-client"
-version = "0.2.6"
+version = "0.2.8"
 dependencies = [
  "futures",
+ "hex",
  "http",
  "reqwest",
  "serde",
