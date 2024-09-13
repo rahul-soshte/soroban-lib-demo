@@ -25,7 +25,7 @@ use soroban_client::contract::ContractBehavior;
 #[tokio::main]
 async fn main() {
 
-    let _server = Server::new("https://soroban-testnet.stellar.org", Options{ allow_http: None, timeout: Some(1000), headers: None });
+    let server = Server::new("https://soroban-testnet.stellar.org", Options{ allow_http: None, timeout: Some(1000), headers: None });
     let source_secret_key = "SCCTADNI4B4FEFELEYEYSDUNQXVTXHRAOEXWWJWHJ57EO3VHGXJFL3TC";
     let source_keypair = Keypair::from_secret(source_secret_key).expect("Invalid secret key");
     let _source_public_key = source_keypair.public_key();
@@ -33,20 +33,24 @@ async fn main() {
 
     let public_key = _source_public_key; // Replace with the actual public key
     // let secret_string: &str = source_secret_key; // Replace with the actual secret key
-    let contract_id = "CCJYKPKPQADXVZVGNJIDIUFNBMV6FOKCFZZZMA2FCEZOMDIQA5BBPPCN"; // Replace with the actual contract ID
+    let contract_id = "CDEJ6E4AGUKHNRXQUKFCPLGNB2GGC4LVRR2GVAY3EQTOLM3FPLBAPEIO"; // Replace with the actual contract ID
     let source_secret_key = "SCCTADNI4B4FEFELEYEYSDUNQXVTXHRAOEXWWJWHJ57EO3VHGXJFL3TC";
     let source_keypair = Keypair::from_secret(source_secret_key).expect("Invalid secret key");
     let _source_public_key = source_keypair.public_key();
     let _source_public_key = "GBZXN7PIRZGNMHGA7MUUUF4GWPY5AYPV6LY4UV2GL6VJGIQRXFDNMADI";
 
-    let account = _server.get_account(public_key).await.unwrap();
+    let account = server.get_account(public_key).await.unwrap();
     let fee = 100_u32;
     let contract = contract::Contracts::new(contract_id).unwrap();
 
-    let mut _transaction = TransactionBuilder::new(account, Networks::testnet())
+    let mut transaction = TransactionBuilder::new(account, Networks::testnet())
         .fee(fee)
         .add_operation(
             contract.call("increment", None),
         )
         .build();
+
+    transaction = server.prepare_transaction(transaction, Some(Networks::testnet())).await.unwrap();
+
+
 }
